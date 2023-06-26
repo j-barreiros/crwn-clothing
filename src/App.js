@@ -1,43 +1,43 @@
 
 const App = () => {
+
+  const cateogories = [
+    {
+      id: 1,
+      title: 'Hats',
+    },
+    {
+      id: 1,
+      title: 'Jackets',
+    },
+    {
+      id: 1,
+      title: 'Sneakers',
+    },
+    {
+      id: 1,
+      title: 'Womens',
+    },
+    {
+      id: 1,
+      title: 'Mens',
+    },
+  ]
+
   return (
     <section className="categories-container">
 
-      <article className="category-container">
-        <div className="cateogry-body-container">
-          <h2>Hats</h2>
-          <p>SHOP NOW</p>
-        </div>
-      </article>
-
-      <article className="category-container">
-        <div className="cateogry-body-container">
-          <h2>Jackets</h2>
-          <p>SHOP NOW</p>
-        </div>
-      </article>
-
-      <article className="category-container">
-        <div className="cateogry-body-container">
-          <h2>Sneakers</h2>
-          <p>SHOP NOW</p>
-        </div>
-      </article>
-
-      <article className="category-container">
-        <div className="cateogry-body-container">
-          <h2>Womens</h2>
-          <p>SHOP NOW</p>
-        </div>
-      </article>
-
-      <article className="category-container">
-        <div className="cateogry-body-container">
-          <h2>Mens</h2>
-          <p>SHOP NOW</p>
-        </div>
-      </article>
-
+      {cateogories.map(({id, title}) => {
+        return (
+          <article key={id} className="category-container">
+            <div className="background-image"/>
+            <div className="cateogry-body-container">
+              <h2>{title}</h2>
+              <p>SHOP NOW</p>
+            </div>
+          </article>
+        )
+      })}
     </section>
   );
 }
