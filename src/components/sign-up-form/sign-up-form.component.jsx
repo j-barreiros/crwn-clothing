@@ -1,32 +1,51 @@
+// Hooks
 import { useState } from "react";
+
+// Firebase
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 
 const defaultFormFields = {
     displayName: '',
     email: '',
     password: '',
-    confirmPassworrd: '',
+    confirmPassword: '',
 }
 
 const SignUpForm = () => {
 
     const [formFields, setFormFields] = useState(defaultFormFields);
 
-    const { displayName, email, password, confirmPassworrd } = formFields;
+    const { displayName, email, password, confirmPassword } = formFields;
 
     const handleChange = (event) => {
         const {name, value} = event.target;
         setFormFields({ ...formFields, [name]: value });
     }
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (password != confirmPassword) return;
+
+
+        try {
+            const {user} = await createAuthUserWithEmailAndPassword( email, password);
+            
+            await createUserDocumentFromAuth(user, {displayName});
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div>
             <h1>Sign up with your email and password</h1>
-            <form onSubmit={() => { }}>
+            <form onSubmit={handleSubmit}>
                 <label>Display Name</label>
                 <input
                     type="text"
-                    onChange={(event) => handleChange(event)}
-                    name="dispalyName"
+                    onChange={handleChange}
+                    name="displayName"
                     value={displayName}
                     placeholder="Display Name"
                     required
@@ -35,7 +54,7 @@ const SignUpForm = () => {
                 <label>Email</label>
                 <input
                     type="email"
-                    onChange={(event) => handleChange(event)}
+                    onChange={handleChange}
                     name="email"
                     placeholder="Email"
                     value={email}
@@ -45,7 +64,7 @@ const SignUpForm = () => {
                 <label>Password</label>
                 <input
                     type="password"
-                    onChange={(event) => handleChange(event)}
+                    onChange={handleChange}
                     name="password"
                     placeholder="password"
                     value={password}
@@ -55,10 +74,10 @@ const SignUpForm = () => {
                 <label>Confirm Password</label>
                 <input
                     type="password"
-                    onChange={(event) => handleChange(event)}
+                    onChange={handleChange}
                     name="confirmPassword"
                     placeholder="confirm password"
-                    value={confirmPassworrd}
+                    value={confirmPassword}
                     required
                 />
 
