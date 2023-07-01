@@ -2,7 +2,7 @@
 import "./sign-in-form.styles.scss";
 
 // Hooks
-import { useState, useContext } from "react";
+import { useState} from "react";
 
 // Firebase
 import {
@@ -14,9 +14,6 @@ import {
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
-// Context
-import { UserContext } from "../../contexts/user.context";
-
 const defaultFormFields = {
     email: '',
     password: '',
@@ -27,8 +24,6 @@ const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
 
     const { email, password } = formFields;
-
-    const {setCurrentUser} = useContext(UserContext)
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
@@ -63,7 +58,7 @@ const SignInForm = () => {
 
 
     const signInWithGoogle = async () => {
-        const {user} = await signWithGooglePopup();
+        await signWithGooglePopup();
     }
 
     return (

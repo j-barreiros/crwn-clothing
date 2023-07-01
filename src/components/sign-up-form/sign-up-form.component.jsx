@@ -2,10 +2,7 @@
 import "./sign-up-form.styles.scss";
 
 // Hooks
-import { useState, useContext } from "react";
-
-// Context
-import { UserContext } from "../../contexts/user.context";
+import { useState} from "react";
 
 // Firebase
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
@@ -25,8 +22,6 @@ const SignUpForm = () => {
 
     const { displayName, email, password, confirmPassword } = formFields;
 
-    const {setCurrentUser} = useContext(UserContext);
-
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
     }
@@ -44,9 +39,6 @@ const SignUpForm = () => {
 
         try {
             const {user} = await createAuthUserWithEmailAndPassword( email, password);
-
-            setCurrentUser(user)
-
             await createUserDocumentFromAuth(user, {displayName});
             resetFormFields()
         } catch (error) {
