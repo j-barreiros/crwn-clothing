@@ -44,7 +44,6 @@ const SignInForm = () => {
 
         try {
             const {user} = await signInAuthWithEmailAndPassword(email, password);
-            setCurrentUser(user)
             resetFormFields();
         } catch (error) {
             switch (error.code) {
@@ -65,7 +64,6 @@ const SignInForm = () => {
 
     const signInWithGoogle = async () => {
         const {user} = await signWithGooglePopup();
-        setCurrentUser(user)  
     }
 
     return (
