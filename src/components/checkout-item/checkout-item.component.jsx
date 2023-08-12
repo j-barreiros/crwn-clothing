@@ -1,35 +1,42 @@
 import { useContext } from 'react';
-import CheckoutItemContainer from './checkout-item.styles';
+
 import { CartContext } from '../../contexts/cart.context';
 
-const CheckoutItem = ({ item }) => {
-    const { addItemToCart, removeItemFromCart, deleteItemFromCart } = useContext(CartContext);
-    const { id, imageUrl, name, quantity, price } = item;
-    return (
-        <CheckoutItemContainer key={id}>
-            <div className="image-container">
-                <img src={imageUrl} alt={name} />
-            </div>
-            <span className="name">{name}</span>
-            <span className="quantity">
-                <div
-                    className='arrow'
-                    onClick={() => removeItemFromCart(item)}
-                >
-                    &#10094;
-                </div>
-                <span className='value'>{quantity}</span>
-                <div
-                    className='arrow'
-                    onClick={() => addItemToCart(item)}
-                >
-                    &#10095;
-                </div>
-            </span>
-            <p className="price">${quantity * price}</p>
-            <div className='remove-button' onClick={() => deleteItemFromCart(id)}>&#10005;</div>
-        </CheckoutItemContainer>
-    )
-}
+import {
+  CheckoutItemContainer,
+  ImageContainer,
+  BaseSpan,
+  Quantity,
+  Arrow,
+  Value,
+  RemoveButton,
+} from './checkout-item.styles';
+
+const CheckoutItem = ({ cartItem }) => {
+  const { name, imageUrl, price, quantity } = cartItem;
+
+  const { clearItemFromCart, addItemToCart, removeItemToCart } =
+    useContext(CartContext);
+
+  const clearItemHandler = () => clearItemFromCart(cartItem);
+  const addItemHandler = () => addItemToCart(cartItem);
+  const removeItemHandler = () => removeItemToCart(cartItem);
+
+  return (
+    <CheckoutItemContainer>
+      <ImageContainer>
+        <img src={imageUrl} alt={`${name}`} />
+      </ImageContainer>
+      <BaseSpan> {name} </BaseSpan>
+      <Quantity>
+        <Arrow onClick={removeItemHandler}>&#10094;</Arrow>
+        <Value>{quantity}</Value>
+        <Arrow onClick={addItemHandler}>&#10095;</Arrow>
+      </Quantity>
+      <BaseSpan> {price}</BaseSpan>
+      <RemoveButton onClick={clearItemHandler}>&#10005;</RemoveButton>
+    </CheckoutItemContainer>
+  );
+};
 
 export default CheckoutItem;
