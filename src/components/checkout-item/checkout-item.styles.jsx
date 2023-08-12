@@ -1,4 +1,6 @@
-.checkout-item-container {
+import styled from "styled-components";
+
+const CheckoutItemContainer = styled.article`
   width: 100%;
   display: flex;
   min-height: 100px;
@@ -39,4 +41,6 @@
     padding-left: 12px;
     cursor: pointer;
   }
-}
+`
+
+export default CheckoutItemContainer;

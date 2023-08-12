@@ -1,10 +1,10 @@
 import {Fragment, useContext } from 'react';
-import { CategoriesContexts } from '../../contexts/categories.context';
+import { CategoriesContext } from '../../contexts/categories.context';
 
 import CategoryPreview from '../../components/category-preview/category-preview.component';
 
 const CategoriesPreview = () => {
-    const { categoriesMap } = useContext(CategoriesContexts);
+    const { categoriesMap } = useContext(CategoriesContext);
     return (
         <Fragment>
             {

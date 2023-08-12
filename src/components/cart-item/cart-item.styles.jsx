@@ -1,4 +1,6 @@
-.cart-item-container {
+import styled from 'styled-components';
+
+const CartItemContainer = styled.article`
   width: 100%;
   display: flex;
   height: 80px;
@@ -20,4 +22,6 @@
       font-size: 16px;
     }
   }
-}
+`
+
+export default CartItemContainer;

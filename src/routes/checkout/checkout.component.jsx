@@ -5,14 +5,14 @@ import { CartContext } from "../../contexts/cart.context";
 // Components
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 // Style
-import './checkout.styles.scss'
+import CheckoutContainer from "./checkout.styles";
 
 const CheckoutPage = () => {
 
     const {cartItems,getTotalCartValue} = useContext(CartContext);
 
     return (
-        <section className="checkout-container">
+        <CheckoutContainer>
             <section className="checkout-header">
                 <article className="header-block">
                     <span>Product</span>
@@ -29,7 +29,7 @@ const CheckoutPage = () => {
             </section>
             {cartItems.map(item => <CheckoutItem item={item}/>)}
             <span className="total">Total ${getTotalCartValue()}</span>
-        </section>
+        </CheckoutContainer>
     )
 }
 

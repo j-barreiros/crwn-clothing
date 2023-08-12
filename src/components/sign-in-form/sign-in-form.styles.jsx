@@ -1,4 +1,6 @@
-.sign-up-container {
+import styled from "styled-components";
+
+const SignInContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 380px;
@@ -11,4 +13,6 @@
         display: flex;
         justify-content: space-between;
     }
-}
+`
+
+export default SignInContainer; 
